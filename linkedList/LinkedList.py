@@ -39,24 +39,23 @@ class LinkedList():
         if not head:
             return "error"
         temp = head
-        while temp.data != key:
+        while temp.data != key and temp:
             temp = temp.next
-
+        # if not found insert at end
         temp_i.next = temp.next
         temp.next = temp_i
         return head
 
     def insert_at_position(self, data, position, head):
-        if position < 0 or position> self.length(head):
+        if position < 0 or position > self.length(head):
             print " position  out of range"
             return head
         temp_i = LinkedList(data)
         temp = head
         if not position:
             temp_i.next = head
-            head = temp_i
             return temp_i
-        while position>1 and temp:
+        while position >1 and temp:
             temp = temp.next
             position -= 1
 
@@ -73,6 +72,8 @@ class LinkedList():
         return count
 
     def delete_first(self, head):
+        if not head:
+            return head
         temp = head.next
         del head
         return temp
@@ -82,7 +83,8 @@ class LinkedList():
     #     print class_name, "destroyed"
 
     def delete_last(self, head):
-        # print "\n"
+        if not head:
+            return head
         temp = head
         prev = None
         while temp.next:
@@ -90,7 +92,6 @@ class LinkedList():
             temp = temp.next
         prev.next = None
         del temp
-
         return head
 
 
