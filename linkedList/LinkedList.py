@@ -47,9 +47,16 @@ class LinkedList():
         return head
 
     def insert_at_position(self, data, position, head):
+        if position < 0 or position> self.length(head):
+            print " position  out of range"
+            return head
         temp_i = LinkedList(data)
         temp = head
-        while position > 2:
+        if not position:
+            temp_i.next = head
+            head = temp_i
+            return temp_i
+        while position>1 and temp:
             temp = temp.next
             position -= 1
 
@@ -100,7 +107,7 @@ head = head.add(11, head)
 head = head.insert_at_end(5, head)
 
 # print list
-head.print_list(head)
+# head.print_list(head)
 
 # insert after key
 head = head.insert_after_key(9, 10, head)
@@ -113,14 +120,14 @@ head.print_list(head)
 
 # delete head
 head = head.delete_first(head)
-head.print_list(head)
+# head.print_list(head)
 head = head.insert_after_key(11, 10, head)
 head = head.delete_first(head)
 head = head.insert_after_key(10, 11, head)
-head.print_list(head)
+# head.print_list(head)
 
 # delete last
 head = head.delete_last(head)
 
-head.print_list(head)
+# head.print_list(head)
 
