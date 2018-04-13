@@ -121,6 +121,13 @@ class LinkedList():
         del temp
         return head
 
+    def delete_list(self, head):
+        if not head:
+            print "list deleted"
+            return
+        self.delete_list(head.next)
+        del head
+
 # create list
 head = LinkedList(6)
 
@@ -169,3 +176,6 @@ head.print_list(head)
 head = head.delete_at_pos(head, 3)
 
 head.print_list(head)
+head.delete_list(head)
+head.print_list(head)
+
