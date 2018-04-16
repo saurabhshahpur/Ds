@@ -127,6 +127,15 @@ class LinkList:
             return 1
         return 1 + self.find_length(temp.get_next())
 
+    def search(self, key):
+        temp = self.head
+        while temp:
+            if temp.get_data() == key:
+                return True
+            temp = temp.get_next()
+        return False
+
+
 
 ll = LinkList()
 
@@ -168,11 +177,16 @@ ll.print_list()
 ll.delete_with_key(3)
 ll.print_list()
 
-ll.delete_with_key(0)
-ll.print_list()
-
-ll.delete_with_key(1)
-ll.print_list()
+# ll.delete_with_key(0)
+# ll.print_list()
+#
+# ll.delete_with_key(1)
+# ll.print_list()
 
 print ll.find_length(ll.head)
 ll.print_list()
+
+print ll.search(0)
+# print ll.search(5)
+# print ll.search(1)
+# print ll.search(-1)
