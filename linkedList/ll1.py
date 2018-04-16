@@ -120,6 +120,13 @@ class LinkList:
         del temp
         self.size -= 1
 
+    def find_length(self, temp):
+        if not temp:
+            return 0
+        if not temp.get_next():
+            return 1
+        return 1 + self.find_length(temp.get_next())
+
 
 ll = LinkList()
 
@@ -165,4 +172,7 @@ ll.delete_with_key(0)
 ll.print_list()
 
 ll.delete_with_key(1)
+ll.print_list()
+
+print ll.find_length(ll.head)
 ll.print_list()
