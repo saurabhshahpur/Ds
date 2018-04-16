@@ -73,6 +73,34 @@ class LinkList:
         temp.set_next(temp_i)
         prev.set_next(temp)
 
+    # pos start from index 0
+    def delete_at_pos(self, pos):
+
+        if pos < 0 or pos+1 > self.size:
+            print "index out of range"
+            return
+        if self.size == 0:
+            print "list already empty"
+            return
+        if pos == 0:
+            temp = self.head
+            nextNone = temp.get_next()
+            del temp
+            self.head = nextNone
+            return
+        prev = None
+        temp = self.head
+
+        while pos and temp:
+            pos -= 1
+            prev = temp
+            temp = temp.get_next()
+
+        prev.set_next(temp.get_next())
+        del temp
+        self.size -= 1
+
+
 
 ll = LinkList()
 
@@ -100,4 +128,13 @@ ll.insert_at_pos(8, -2)
 
 ll.print_list()
 ll.insert_at_pos(2, 5)
+ll.print_list()
+
+ll.delete_at_pos(0)
+ll.print_list()
+
+ll.delete_at_pos(6)
+ll.print_list()
+
+ll.delete_at_pos(2)
 ll.print_list()
