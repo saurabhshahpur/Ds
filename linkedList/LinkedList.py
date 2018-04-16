@@ -226,6 +226,16 @@ class LinkList:
             temp = temp.get_next()
         return count
 
+    def reverse(self, temp):
+        if not temp or not temp.get_next():
+            return temp
+        tem_next = temp.get_next()
+        rev = self.reverse(temp.get_next())
+        temp.set_next()
+        tem_next.set_next(temp)
+        self.head = rev
+        return rev
+
 
 ll = LinkList()
 
@@ -326,3 +336,6 @@ ll.print_list()
 # print ll.get_nth_node_from_end(6)
 # print ll.get_nth_node_from_end(5)
 # print ll.get_nth_node_from_end(3)
+
+ll.reverse(ll.head)
+ll.print_list()

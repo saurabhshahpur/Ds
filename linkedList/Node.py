@@ -9,5 +9,5 @@ class Node:
     def get_next(self):
         return self.next
 
-    def set_next(self, node):
+    def set_next(self, node=None):
         self.next = node
