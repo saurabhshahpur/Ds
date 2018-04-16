@@ -236,6 +236,22 @@ class LinkList:
         self.head = rev
         return rev
 
+    def set_loop(self, key):
+        # find end of list and sent its next to key1
+        temp = self.head
+        while temp and temp.get_data() != key:
+            temp = temp.get_next()
+
+        if not temp:
+            print "key not found"
+            return
+
+        temp1 = self.head
+        while temp1.get_next():
+            temp1 = temp1.get_next()
+
+        temp1.set_next(temp)
+        return
 
 ll = LinkList()
 
@@ -339,3 +355,4 @@ ll.print_list()
 
 ll.reverse(ll.head)
 ll.print_list()
+ll.set_loop(2)
