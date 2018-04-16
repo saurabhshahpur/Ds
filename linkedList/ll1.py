@@ -135,6 +135,13 @@ class LinkList:
             temp = temp.get_next()
         return False
 
+    def search_recursive(self, key, temp):
+        if not temp:
+            return False
+        if temp.get_data() == key:
+            return True
+        return self.search_recursive(key, temp.get_next())
+
 
 
 ll = LinkList()
@@ -186,7 +193,7 @@ ll.print_list()
 print ll.find_length(ll.head)
 ll.print_list()
 
-print ll.search(0)
-# print ll.search(5)
-# print ll.search(1)
-# print ll.search(-1)
+print ll.search_recursive(0, ll.head)
+print ll.search_recursive(5, ll.head)
+print ll.search_recursive(1, ll.head)
+print ll.search_recursive(-1, ll.head)
