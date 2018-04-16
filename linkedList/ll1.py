@@ -183,7 +183,6 @@ class LinkList:
         node1.set_next(node2.get_next())
         prev1.set_next(node2)
         node2.set_next(tempNext)
-        # self.head = node2
 
 ll = LinkList()
 
