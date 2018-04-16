@@ -96,7 +96,7 @@ ll.insert_at_pos(0, 4)
 
 ll.print_list()
 
-ll.insert_at_pos(6, -2)
+ll.insert_at_pos(8, -2)
 
 ll.print_list()
 ll.insert_at_pos(2, 5)
