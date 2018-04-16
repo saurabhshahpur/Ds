@@ -60,6 +60,7 @@ class LinkList:
 
         temp.set_next(temp_i)
         prev.set_next(temp)
+        self.size += 1
 
     # pos start from index 0
     def delete_at_pos(self, pos):
@@ -196,76 +197,98 @@ class LinkList:
         while self.head:
             temp = self.head
             self.head = self.head.get_next()
+            self.size -= 1
             del temp
         return True
+
+    # n is 1 base index
+    def get_nth_node_from_end(self, n):
+        # print self .size
+        if n < 1 or n > self.size:
+            return "index out of range index start from 1"
+        slow = self.head
+        fast = self.head
+        n -= 1
+        while n and fast:
+            n -= 1
+            fast = fast.get_next()
+        while fast.get_next():
+            fast = fast.get_next()
+            slow = slow.get_next()
+        return slow.get_data()
 
 
 ll = LinkList()
 
 ll.insert_at_pos(0, 4)
 
-ll.print_list()
+# ll.print_list()
 ll.add(1)
 ll.add(2)
 ll.add(3)
-ll.print_list()
-print ll.get_length()
+# ll.print_list()
+# print ll.get_length()
 
 ll.insert_at_end(0)
 ll.insert_at_end(-1)
 
-ll.print_list()
+# ll.print_list()
 
-print ll.get_length()
+# print ll.get_length()
 
 ll.insert_at_pos(0, 4)
 
-ll.print_list()
+# ll.print_list()
+# print ll.get_length()
 
 ll.insert_at_pos(8, -2)
+#
+# ll.print_list()
+# print ll.get_length()
 
-ll.print_list()
 ll.insert_at_pos(2, 5)
-ll.print_list()
+# ll.print_list()
+# print ll.get_length()
+
 
 ll.delete_at_pos(0)
-ll.print_list()
+# ll.print_list()
 
 ll.delete_at_pos(6)
-ll.print_list()
+# ll.print_list()
 
-ll.delete_at_pos(2)
-ll.print_list()
+# ll.delete_at_pos(2)
+# ll.print_list()
+#
+# ll.delete_with_key(3)
+# ll.print_list()
+#
+# ll.delete_with_key(0)
+# ll.print_list()
+#
+# ll.delete_with_key(1)
+# ll.print_list()
 
-ll.delete_with_key(3)
-ll.print_list()
-
-ll.delete_with_key(0)
-ll.print_list()
-
-ll.delete_with_key(1)
-ll.print_list()
-
-print ll.find_length(ll.head)
-ll.print_list()
-
-print ll.search_recursive(0, ll.head)
-print ll.search_recursive(5, ll.head)
-print ll.search_recursive(1, ll.head)
-print ll.search_recursive(-1, ll.head)
+# print ll.find_length(ll.head)
+# ll.print_list()
+#
+# print ll.search_recursive(0, ll.head)
+# print ll.search_recursive(5, ll.head)
+# print ll.search_recursive(1, ll.head)
+# print ll.search_recursive(-1, ll.head)
 
 ll.swap_nodes(0, 5)
 ll.print_list()
 
-print ll.get_nth_node(0)
-print ll.get_nth_node(4)
-print ll.get_nth_node(5)
-print ll.get_nth_node(6)
-print ll.get_nth_node(-1)
+# print ll.get_nth_node(0)
+# print ll.get_nth_node(4)
+# print ll.get_nth_node(5)
+# print ll.get_nth_node(6)
+# print ll.get_nth_node(-1)
 
-ll.print_list()
-ll.delete_list()
-ll.print_list()
+# ll.print_list()
+# ll.delete_list()
+# ll.print_list()
 
 
 # print ll.get_middle()
@@ -287,3 +310,10 @@ ll.print_list()
 # ll.delete_at_pos(0)
 # ll.print_list()
 # print ll.get_middle()
+
+print ll.get_nth_node_from_end(0)
+print ll.get_nth_node_from_end(7)
+print ll.get_nth_node_from_end(1)
+print ll.get_nth_node_from_end(6)
+print ll.get_nth_node_from_end(5)
+print ll.get_nth_node_from_end(3)
