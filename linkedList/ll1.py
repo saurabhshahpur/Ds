@@ -100,6 +100,25 @@ class LinkList:
         del temp
         self.size -= 1
 
+    def delete_with_key(self, key):
+        prev = None
+        temp = self.head
+        while temp and temp.get_data() != key:
+            prev = temp
+            temp = temp.get_next()
+
+        if not temp:
+            print "key not found"
+            return
+        if not prev:
+            # found at  start of list
+            self.head = temp.get_next()
+            del temp
+            self.size -= 1
+            return
+        prev.set_next(temp.get_next())
+        del temp
+        self.size -= 1
 
 
 ll = LinkList()
@@ -137,4 +156,13 @@ ll.delete_at_pos(6)
 ll.print_list()
 
 ll.delete_at_pos(2)
+ll.print_list()
+
+ll.delete_with_key(3)
+ll.print_list()
+
+ll.delete_with_key(0)
+ll.print_list()
+
+ll.delete_with_key(1)
 ll.print_list()
