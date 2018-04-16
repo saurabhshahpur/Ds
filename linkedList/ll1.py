@@ -167,9 +167,7 @@ class LinkList:
             prev1 = prev2
             prev2 = t
 
-        print node1.get_data()
-        print node2.get_data()
-        print prev2.get_data()
+
         if not prev1:
             # first node is head
             prev2.set_next(node1)
@@ -183,6 +181,29 @@ class LinkList:
         node1.set_next(node2.get_next())
         prev1.set_next(node2)
         node2.set_next(tempNext)
+
+    # n start with index 0
+    def get_nth_node(self, n):
+        temp = self.head
+        if n < 0 or self.size < n + 1:
+            return "index out of range"
+
+        while temp and n:
+            temp = temp.get_next()
+            n -= 1
+
+        return temp.get_data()
+
+    def get_middle(self):
+        slow = self.head
+        fast = self.head
+        while fast and fast.get_next() and fast.get_next().get_next():
+            fast = fast.get_next().get_next()
+            slow = slow.get_next()
+        if not slow:
+            return "list empty"
+        return slow.get_data()
+
 
 ll = LinkList()
 
@@ -240,3 +261,29 @@ ll.print_list()
 
 ll.swap_nodes(0,5)
 ll.print_list()
+
+# print ll.get_nth_node(0)
+# print ll.get_nth_node(4)
+# print ll.get_nth_node(5)
+# print ll.get_nth_node(6)
+# print ll.get_nth_node(-1)
+
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
