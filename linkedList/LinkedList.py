@@ -253,6 +253,22 @@ class LinkList:
         temp1.set_next(temp)
         return
 
+    def check_loop(self):
+
+        slow = self.head
+        fast = self.head
+        if not fast:
+            return False
+        fast = fast.get_next()
+
+        while fast and fast.get_next() and fast.get_next().get_next():
+            if fast == slow:
+                return True
+            fast = fast.get_next().get_next()
+            slow = slow.get_next()
+        if not fast or not fast.get_next() or not fast.get_next().get_next():
+            return False
+
 ll = LinkList()
 
 ll.insert_at_pos(0, 4)
@@ -355,4 +371,5 @@ ll.print_list()
 
 ll.reverse(ll.head)
 ll.print_list()
-ll.set_loop(2)
+ll.set_loop(44)
+print ll.check_loop()
