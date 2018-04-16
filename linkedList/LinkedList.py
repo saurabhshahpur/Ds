@@ -217,6 +217,15 @@ class LinkList:
             slow = slow.get_next()
         return slow.get_data()
 
+    def count_key(self, key):
+        temp = self.head
+        count = 0
+        while temp:
+            if temp.get_data() == key:
+                count += 1
+            temp = temp.get_next()
+        return count
+
 
 ll = LinkList()
 
@@ -310,10 +319,10 @@ ll.print_list()
 # ll.delete_at_pos(0)
 # ll.print_list()
 # print ll.get_middle()
-
-print ll.get_nth_node_from_end(0)
-print ll.get_nth_node_from_end(7)
-print ll.get_nth_node_from_end(1)
-print ll.get_nth_node_from_end(6)
-print ll.get_nth_node_from_end(5)
-print ll.get_nth_node_from_end(3)
+#
+# print ll.get_nth_node_from_end(0)
+# print ll.get_nth_node_from_end(7)
+# print ll.get_nth_node_from_end(1)
+# print ll.get_nth_node_from_end(6)
+# print ll.get_nth_node_from_end(5)
+# print ll.get_nth_node_from_end(3)
