@@ -1,188 +1,277 @@
-# import bpy
-class LinkedList():
-    def __init__(self, ):
-        self.data = data
-        self.next = None
+from Node import Node
+
+
+class LinkList:
+    def __init__(self, head=None):
+        self.head = head
+        self.size = 0
 
     def add(self, data):
-        temp = LinkedList(data)
-        temp.next = self.head
+        temp = Node(data, self.head)
         self.head = temp
-        # return head
+        self.size += 1
 
-    def print_list(self, head):
-        temp = head
+    def print_list(self):
+        temp = self.head
+
         while temp:
-            print (temp.data),
-            print id(temp)
-            temp = temp.next
+            print temp.get_data(),
+            temp = temp.get_next()
+
         print "\n"
 
-    def print_reverse(self, head):
-        if not head:
+    def insert_at_end(self, data):
+        temp = Node(data)
+        temp_i = self.head
+
+        if not self.head:
+            self.head = temp
             return
-        self.print_reverse(head.next)
-        print (head.data),
 
-    def insert_at_end(self, data, head):
-        temp = LinkedList(data)
-        if not head:
-            return temp
-        trav = head
-        while trav.next:
-            trav = trav.next
-        trav.next = temp
-        return head
+        while temp_i.get_next():
+            temp_i = temp_i.get_next()
 
-    def insert_after_key(self, data, key, head):
-        temp_i = LinkedList(data)
-        if not head:
-            return "error"
-        temp = head
-        while temp.data != key and temp:
-            temp = temp.next
-        # if not found insert at end
-        temp_i.next = temp.next
-        temp.next = temp_i
-        return head
-    # position start form  index 0
-    def insert_at_position(self, data, position, head):
-        if position < 0 or position > self.length(head):
-            print " position  out of range"
-            return head
-        temp_i = LinkedList(data)
-        temp = head
-        if not position:
-            temp_i.next = head
-            return temp_i
-        while position >1 and temp:
-            temp = temp.next
-            position -= 1
+        temp_i.set_next(temp)
 
-        temp_i.next = temp.next
-        temp.next = temp_i
-        return head
+        self.size += 1
 
-    def length(self, head):
-        count = 0
-        temp = head
-        while temp:
-            count += 1
-            temp = temp.next
-        return count
+    def get_length(self):
+        return self.size
 
-    def delete_first(self, head):
-        if not head:
-            return head
-        temp = head.next
-        del head
-        return temp
+    # pos start from index 0
+    def insert_at_pos(self, pos, data):
+        temp = Node(data)
+        length = self.size
+        if pos < 0 or pos > length:
+            print "index out of range, index start from 0"
+            return
 
-    # def __del__(self):
-    #     class_name = self.__class__.__name__
-    #     print class_name, "destroyed"
+        if pos == 0:
+            self.size += 1
+            temp.set_next(self.head)
+            self.head = temp
+            return
+        temp_i = self.head
+        prev = Node
+        while pos and temp_i:
+            pos -= 1
+            prev = temp_i
+            temp_i = temp_i.get_next()
 
-    def delete_last(self, head):
-        if not head:
-            return head
-        temp = head
+        temp.set_next(temp_i)
+        prev.set_next(temp)
+
+    # pos start from index 0
+    def delete_at_pos(self, pos):
+
+        if pos < 0 or pos+1 > self.size:
+            print "index out of range, index start from 0"
+            return
+        if self.size == 0:
+            print "list already empty"
+            return
+        if pos == 0:
+            temp = self.head
+            nextNone = temp.get_next()
+            del temp
+            self.head = nextNone
+            return
         prev = None
-        while temp.next:
-            prev = temp
-            temp = temp.next
-        prev.next = None
-        del temp
-        return head
+        temp = self.head
 
-    # pos start from  index 1
-    def delete_at_pos(self, head, pos):
-        if not head:
-            print "list is empty"
-            return head
-        if pos < 1:
-            print "index out of range"
-            return head
-        if pos == 1:
-            temp = head.next
-            del head
-            return temp
-        temp = head
-        prev = None
-        pos -= 1
         while pos and temp:
             pos -= 1
             prev = temp
-            temp = temp.next
-        if not temp:
-            print "index out of range"
-            return head
+            temp = temp.get_next()
 
-        prev.next = temp.next
+        prev.set_next(temp.get_next())
         del temp
-        return head
+        self.size -= 1
 
-    def delete_list(self, head):
-        if not head:
-            print "list deleted"
-            return head
-        # if not head.next:
-        #     del head
-        #     print "list deleted"
-        #     return
-        temp = head.next
-        del head
-        self.delete_list(temp)
+    def delete_with_key(self, key):
+        prev = None
+        temp = self.head
+        while temp and temp.get_data() != key:
+            prev = temp
+            temp = temp.get_next()
 
-# create list
-head = LinkedList(6)
+        if not temp:
+            print "key not found"
+            return
+        if not prev:
+            # found at  start of list
+            self.head = temp.get_next()
+            del temp
+            self.size -= 1
+            return
+        prev.set_next(temp.get_next())
+        del temp
+        self.size -= 1
 
-# insert at head
-head.add(7)
-head.print_list(head)
+    def find_length(self, temp):
+        if not temp:
+            return 0
+        if not temp.get_next():
+            return 1
+        return 1 + self.find_length(temp.get_next())
 
-# head = head.add(8, head)
-# head = head.add(10, head)
-# head = head.add(11, head)
+    def search(self, key):
+        temp = self.head
+        while temp:
+            if temp.get_data() == key:
+                return True
+            temp = temp.get_next()
+        return False
 
-# insert at end
-# head = head.insert_at_end(5, head)
+    def search_recursive(self, key, temp):
+        if not temp:
+            return False
+        if temp.get_data() == key:
+            return True
+        return self.search_recursive(key, temp.get_next())
+
+    def swap_nodes(self, key1, key2):
+        node1 = self.head
+        prev1 = None
+        while node1 and node1.get_data() != key1:
+            prev1 = node1
+            node1 = node1.get_next()
+
+        node2 = self.head
+        prev2 = None
+        while node2 and node2.get_data() != key2:
+            prev2 = node2
+            node2 = node2.get_next()
+
+        if not node1 or not node2:
+            print "invalid keys"
+            return
+        if not prev2:
+            # swap node1, node2 and prev1, prev2
+            t = node1
+            node1 = node2
+            node2 = t
+            t = prev1
+            prev1 = prev2
+            prev2 = t
+
+
+        if not prev1:
+            # first node is head
+            prev2.set_next(node1)
+            tempNext = node1.get_next()
+            node1.set_next(node2.get_next())
+            node2.set_next(tempNext)
+            self.head = node2
+            return
+        prev2.set_next(node1)
+        tempNext = node1.get_next()
+        node1.set_next(node2.get_next())
+        prev1.set_next(node2)
+        node2.set_next(tempNext)
+
+    # n start with index 0
+    def get_nth_node(self, n):
+        temp = self.head
+        if n < 0 or self.size < n + 1:
+            return "index out of range, index start from 0"
+
+        while temp and n:
+            temp = temp.get_next()
+            n -= 1
+
+        return temp.get_data()
+
+    def get_middle(self):
+        slow = self.head
+        fast = self.head
+        while fast and fast.get_next() and fast.get_next().get_next():
+            fast = fast.get_next().get_next()
+            slow = slow.get_next()
+        if not slow:
+            return "list empty"
+        return slow.get_data()
+
 #
-# # print list
-# # head.print_list(head)
+# ll = LinkList()
 #
-# # insert after key
-# head = head.insert_after_key(9, 10, head)
-# # head.print_list(head)
+# ll.insert_at_pos(0, 4)
 #
-# # insert at pos
-# head = head.insert_at_position(20, 8, head)
-# # head.print_list(head)
+# ll.print_list()
+# ll.add(1)
+# ll.add(2)
+# ll.add(3)
+# ll.print_list()
+# print ll.get_length()
 #
+# ll.insert_at_end(0)
+# ll.insert_at_end(-1)
 #
-# # delete head
-# head = head.delete_first(head)
-# # head.print_list(head)
-# head = head.insert_after_key(11, 10, head)
-# head = head.delete_first(head)
-# head = head.insert_after_key(10, 11, head)
-# # head.print_list(head)
+# ll.print_list()
 #
-# # delete last
-# head = head.delete_last(head)
+# print ll.get_length()
 #
-# head.print_list(head)
-# head = head.delete_at_pos(head, 0)
-# head = head.delete_at_pos(head, 6)
-# head.print_list(head)
+# ll.insert_at_pos(0, 4)
 #
-# head = head.delete_at_pos(head, 1)
+# ll.print_list()
 #
-# head.print_list(head)
+# ll.insert_at_pos(8, -2)
 #
+# ll.print_list()
+# ll.insert_at_pos(2, 5)
+# ll.print_list()
 #
-# head = head.delete_at_pos(head, 3)
+# ll.delete_at_pos(0)
+# ll.print_list()
 #
-# head.print_list(head)
-# head1 = head.delete_list(head)
-# head.print_list(head)
+# ll.delete_at_pos(6)
+# ll.print_list()
 #
+# ll.delete_at_pos(2)
+# ll.print_list()
+#
+# ll.delete_with_key(3)
+# ll.print_list()
+#
+# ll.delete_with_key(0)
+# ll.print_list()
+#
+# ll.delete_with_key(1)
+# ll.print_list()
+#
+# print ll.find_length(ll.head)
+# ll.print_list()
+#
+# print ll.search_recursive(0, ll.head)
+# print ll.search_recursive(5, ll.head)
+# print ll.search_recursive(1, ll.head)
+# print ll.search_recursive(-1, ll.head)
+#
+# ll.swap_nodes(0,5)
+# ll.print_list()
+#
+# print ll.get_nth_node(0)
+# print ll.get_nth_node(4)
+# print ll.get_nth_node(5)
+# print ll.get_nth_node(6)
+# print ll.get_nth_node(-1)
+#
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
+# ll.delete_at_pos(0)
+# ll.print_list()
+# print ll.get_middle()
