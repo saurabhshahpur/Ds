@@ -1,14 +1,14 @@
 # import bpy
 class LinkedList():
-    def __init__(self, data):
+    def __init__(self, ):
         self.data = data
         self.next = None
 
-    def add(self, data, head):
+    def add(self, data):
         temp = LinkedList(data)
-        temp.next = head
-        head = temp
-        return head
+        temp.next = self.head
+        self.head = temp
+        # return head
 
     def print_list(self, head):
         temp = head
@@ -124,58 +124,65 @@ class LinkedList():
     def delete_list(self, head):
         if not head:
             print "list deleted"
-            return
-        self.delete_list(head.next)
+            return head
+        # if not head.next:
+        #     del head
+        #     print "list deleted"
+        #     return
+        temp = head.next
         del head
+        self.delete_list(temp)
 
 # create list
 head = LinkedList(6)
 
 # insert at head
-head = head.add(7, head)
-head = head.add(8, head)
-head = head.add(10, head)
-head = head.add(11, head)
+head.add(7)
+head.print_list(head)
+
+# head = head.add(8, head)
+# head = head.add(10, head)
+# head = head.add(11, head)
 
 # insert at end
-head = head.insert_at_end(5, head)
-
-# print list
+# head = head.insert_at_end(5, head)
+#
+# # print list
+# # head.print_list(head)
+#
+# # insert after key
+# head = head.insert_after_key(9, 10, head)
+# # head.print_list(head)
+#
+# # insert at pos
+# head = head.insert_at_position(20, 8, head)
+# # head.print_list(head)
+#
+#
+# # delete head
+# head = head.delete_first(head)
+# # head.print_list(head)
+# head = head.insert_after_key(11, 10, head)
+# head = head.delete_first(head)
+# head = head.insert_after_key(10, 11, head)
+# # head.print_list(head)
+#
+# # delete last
+# head = head.delete_last(head)
+#
 # head.print_list(head)
-
-# insert after key
-head = head.insert_after_key(9, 10, head)
+# head = head.delete_at_pos(head, 0)
+# head = head.delete_at_pos(head, 6)
 # head.print_list(head)
-
-# insert at pos
-head = head.insert_at_position(20, 8, head)
+#
+# head = head.delete_at_pos(head, 1)
+#
 # head.print_list(head)
-
-
-# delete head
-head = head.delete_first(head)
+#
+#
+# head = head.delete_at_pos(head, 3)
+#
 # head.print_list(head)
-head = head.insert_after_key(11, 10, head)
-head = head.delete_first(head)
-head = head.insert_after_key(10, 11, head)
+# head1 = head.delete_list(head)
 # head.print_list(head)
-
-# delete last
-head = head.delete_last(head)
-
-head.print_list(head)
-head = head.delete_at_pos(head, 0)
-head = head.delete_at_pos(head, 6)
-head.print_list(head)
-
-head = head.delete_at_pos(head, 1)
-
-head.print_list(head)
-
-
-head = head.delete_at_pos(head, 3)
-
-head.print_list(head)
-head.delete_list(head)
-head.print_list(head)
-
+#
