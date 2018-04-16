@@ -142,7 +142,48 @@ class LinkList:
             return True
         return self.search_recursive(key, temp.get_next())
 
+    def swap_nodes(self, key1, key2):
+        node1 = self.head
+        prev1 = None
+        while node1 and node1.get_data() != key1:
+            prev1 = node1
+            node1 = node1.get_next()
 
+        node2 = self.head
+        prev2 = None
+        while node2 and node2.get_data() != key2:
+            prev2 = node2
+            node2 = node2.get_next()
+
+        if not node1 or not node2:
+            print "invalid keys"
+            return
+        if not prev2:
+            # swap node1, node2 and prev1, prev2
+            t = node1
+            node1 = node2
+            node2 = t
+            t = prev1
+            prev1 = prev2
+            prev2 = t
+
+        print node1.get_data()
+        print node2.get_data()
+        print prev2.get_data()
+        if not prev1:
+            # first node is head
+            prev2.set_next(node1)
+            tempNext = node1.get_next()
+            node1.set_next(node2.get_next())
+            node2.set_next(tempNext)
+            self.head = node2
+            return
+        prev2.set_next(node1)
+        tempNext = node1.get_next()
+        node1.set_next(node2.get_next())
+        prev1.set_next(node2)
+        node2.set_next(tempNext)
+        # self.head = node2
 
 ll = LinkList()
 
@@ -178,11 +219,11 @@ ll.print_list()
 ll.delete_at_pos(6)
 ll.print_list()
 
-ll.delete_at_pos(2)
-ll.print_list()
-
-ll.delete_with_key(3)
-ll.print_list()
+# ll.delete_at_pos(2)
+# ll.print_list()
+#
+# ll.delete_with_key(3)
+# ll.print_list()
 
 # ll.delete_with_key(0)
 # ll.print_list()
@@ -192,8 +233,11 @@ ll.print_list()
 
 print ll.find_length(ll.head)
 ll.print_list()
+#
+# print ll.search_recursive(0, ll.head)
+# print ll.search_recursive(5, ll.head)
+# print ll.search_recursive(1, ll.head)
+# print ll.search_recursive(-1, ll.head)
 
-print ll.search_recursive(0, ll.head)
-print ll.search_recursive(5, ll.head)
-print ll.search_recursive(1, ll.head)
-print ll.search_recursive(-1, ll.head)
+ll.swap_nodes(0,5)
+ll.print_list()
