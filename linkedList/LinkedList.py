@@ -323,6 +323,28 @@ class LinkList:
     #     self.head = list1
     #     return True
 
+    def get_intersection_point(self, ll1):
+        temp = self.head
+        temp1 = ll1.head
+
+        if ll1.size > self.size:
+            diff = ll1.size - self.size
+            while diff:
+                diff -= 1
+                temp1 = temp1.get_next()
+        else:
+            diff = self.size - ll1.size
+            while diff:
+                diff -= 1
+                temp = temp.get_next()
+
+        while temp and temp1:
+            if temp == temp1:
+                return temp.get_data()
+            temp = temp.get_next()
+            temp1 = temp1.get_next()
+        return "List doesn't intersect "
+
 
 ll = LinkList()
 
@@ -440,7 +462,7 @@ ll1 = LinkList()
 # ll.print_list()
 ll1.add(2)
 ll1.add(4)
-ll1.add(6)
+# ll1.add(6)
 # ll.print_list()
 # print ll.get_length()
 
@@ -458,3 +480,9 @@ ll1.print_list()
 # print ll.check_palindrom()
 
 ll.print_list()
+
+# ll1.head.get_next().set_next(ll.head.get_next().get_next().get_next())
+ll.print_list()
+ll1.print_list()
+
+print ll.get_intersection_point(ll1)
