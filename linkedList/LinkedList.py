@@ -269,43 +269,69 @@ class LinkList:
         if not fast or not fast.get_next() or not fast.get_next().get_next():
             return False
 
+    def merge_list(self, list1):
+        temp = self.head
+        temp1 = list1
+        flist = None
+        while temp and temp1:
+            if temp1.get_data() < temp.get_data():
+                tnode = Node(temp1.get_data(), flist)
+                flist = tnode
+                temp1 = temp1.get_next()
+            else:
+                tnode = Node(temp.get_data(), flist)
+                flist = tnode
+                temp = temp.get_next()
+
+        while temp:
+            tnode = Node(temp.get_data(), flist)
+            flist = tnode
+            temp = temp.get_next()
+
+        while temp1:
+            tnode = Node(temp1.get_data(), flist)
+            flist = tnode
+            temp1 = temp1.get_next()
+        self.head = flist
+        self.reverse(self.head)
+
 ll = LinkList()
 
-ll.insert_at_pos(0, 4)
+# ll.insert_at_pos(0, 4)
 
 # ll.print_list()
 ll.add(1)
-ll.add(2)
 ll.add(3)
+ll.add(5)
 # ll.print_list()
 # print ll.get_length()
 
-ll.insert_at_end(0)
 ll.insert_at_end(-1)
+ll.insert_at_end(-3)
 
 # ll.print_list()
 
 # print ll.get_length()
 
-ll.insert_at_pos(0, 4)
+# ll.insert_at_pos(0, 4)
 
 # ll.print_list()
 # print ll.get_length()
 
-ll.insert_at_pos(8, -2)
+# ll.insert_at_pos(8, -2)
 #
 # ll.print_list()
 # print ll.get_length()
 
-ll.insert_at_pos(2, 5)
+# ll.insert_at_pos(2, 5)
 # ll.print_list()
 # print ll.get_length()
 
 
-ll.delete_at_pos(0)
+# ll.delete_at_pos(0)
 # ll.print_list()
 
-ll.delete_at_pos(6)
+# ll.delete_at_pos(6)
 # ll.print_list()
 
 # ll.delete_at_pos(2)
@@ -328,7 +354,8 @@ ll.delete_at_pos(6)
 # print ll.search_recursive(1, ll.head)
 # print ll.search_recursive(-1, ll.head)
 
-ll.swap_nodes(0, 5)
+# ll.swap_nodes(0, 5)
+ll.reverse(ll.head)
 ll.print_list()
 
 # print ll.get_nth_node(0)
@@ -369,7 +396,33 @@ ll.print_list()
 # print ll.get_nth_node_from_end(5)
 # print ll.get_nth_node_from_end(3)
 
-ll.reverse(ll.head)
+# ll.reverse(ll.head)
+
+# set and check loop
+# ll.print_list()
+# ll.set_loop(44)
+# print ll.check_loop()
+
+
+ll1 = LinkList()
+
+# ll.insert_at_pos(0, 4)
+
+# ll.print_list()
+ll1.add(2)
+ll1.add(4)
+ll1.add(6)
+# ll.print_list()
+# print ll.get_length()
+
+ll1.insert_at_end(0)
+ll1.insert_at_end(-2)
+ll1.reverse(ll1.head)
+ll1.print_list()
+
+# ll.print_list()
+
+ll.merge_list(ll1.head)
+
 ll.print_list()
-ll.set_loop(44)
-print ll.check_loop()
+
