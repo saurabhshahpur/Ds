@@ -20,6 +20,12 @@ class LinkList:
 
         print "\n"
 
+    def print_reverse(self, temp):
+        if not temp:
+            return
+        self.print_reverse(temp.get_next())
+        print temp.get_data(),
+
     def insert_at_end(self, data):
         temp = Node(data)
         temp_i = self.head
@@ -486,3 +492,5 @@ ll.print_list()
 ll1.print_list()
 
 print ll.get_intersection_point(ll1)
+
+ll1.print_reverse(ll1.head)
