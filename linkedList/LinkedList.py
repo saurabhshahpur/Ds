@@ -367,6 +367,22 @@ class LinkList:
                     prev = temp
                     temp = temp.get_next()
 
+    def remove_duplicate_unsorted(self):
+        map_dict = {}
+        temp = self.head
+        prev = None
+        while temp:
+            if temp.get_data() not in map_dict:
+                map_dict[temp.get_data()] = 1
+                prev = temp
+                temp =temp.get_next()
+            else:
+                prev.set_next(temp.get_next())
+                del temp
+                temp = prev.get_next()
+        # temp = self.head
+
+
 ll = LinkList()
 
 # ll.insert_at_pos(0, 4)
@@ -482,7 +498,11 @@ ll1 = LinkList()
 
 # ll.print_list()
 ll1.add(2)
+ll1.add(4)
+
 ll1.add(2)
+ll1.add(4)
+
 ll1.add(2)
 
 ll1.add(4)
@@ -491,9 +511,9 @@ ll1.add(4)
 # print ll.get_length()
 
 ll1.insert_at_end(0)
-ll1.insert_at_end(0)
 ll1.insert_at_end(-2)
-ll1.reverse(ll1.head)
+ll1.insert_at_end(0)
+# ll1.reverse(ll1.head)
 ll1.print_list()
 
 # ll.print_list()
@@ -515,4 +535,7 @@ ll1.print_list()
 # ll1.print_reverse(ll1.head)
 
 ll1.remove_duplicate_sorted()
+ll1.print_list()
+
+ll1.remove_duplicate_unsorted()
 ll1.print_list()
