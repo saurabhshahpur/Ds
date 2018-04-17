@@ -351,6 +351,21 @@ class LinkList:
             temp1 = temp1.get_next()
         return "List doesn't intersect "
 
+    def remove_duplicate_sorted(self):
+        temp = self.head
+        prev = None
+        while temp:
+            if not prev:
+                prev = temp
+                temp = temp.get_next()
+            else:
+                if prev.get_data() == temp.get_data():
+                    prev.set_next(temp.get_next())
+                    del temp
+                    temp = prev.get_next()
+                else:
+                    prev = temp
+                    temp = temp.get_next()
 
 ll = LinkList()
 
@@ -467,11 +482,15 @@ ll1 = LinkList()
 
 # ll.print_list()
 ll1.add(2)
+ll1.add(2)
+ll1.add(2)
+
 ll1.add(4)
 # ll1.add(6)
 # ll.print_list()
 # print ll.get_length()
 
+ll1.insert_at_end(0)
 ll1.insert_at_end(0)
 ll1.insert_at_end(-2)
 ll1.reverse(ll1.head)
@@ -491,6 +510,9 @@ ll.print_list()
 ll.print_list()
 ll1.print_list()
 
-print ll.get_intersection_point(ll1)
+# print ll.get_intersection_point(ll1)
 
-ll1.print_reverse(ll1.head)
+# ll1.print_reverse(ll1.head)
+
+ll1.remove_duplicate_sorted()
+ll1.print_list()
