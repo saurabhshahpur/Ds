@@ -295,6 +295,35 @@ class LinkList:
         self.head = flist
         self.reverse(self.head)
 
+    # def check_palindrom(self):
+    #     list1 = self.head
+    #     temp = self.head
+    #     if self.size % 2 == 0:
+    #         n = self.size/2 - 1
+    #     else:
+    #         n = self.size/2
+    #     original_loop_count = n
+    #     while n:
+    #         temp = temp.get_next()
+    #         n -= 1
+    #
+    #     list2 = self.reverse(temp.get_next())
+    #     temp2 = list2
+    #     temp = list1
+    #     while original_loop_count:
+    #         original_loop_count -= 1
+    #         if temp2.get_data() != temp.get_data():
+    #             return False
+    #         temp = temp.get_next()
+    #         temp2 = temp.get_next()
+    #
+    #     # self.head = list1
+    #     list2 = self.reverse(list2)
+    #     list1.set_next(list2)
+    #     self.head = list1
+    #     return True
+
+
 ll = LinkList()
 
 # ll.insert_at_pos(0, 4)
@@ -306,8 +335,8 @@ ll.add(5)
 # ll.print_list()
 # print ll.get_length()
 
-ll.insert_at_end(-1)
-ll.insert_at_end(-3)
+ll.insert_at_end(3)
+ll.insert_at_end(5)
 
 # ll.print_list()
 
@@ -422,7 +451,10 @@ ll1.print_list()
 
 # ll.print_list()
 
-ll.merge_list(ll1.head)
+# ll.merge_list(ll1.head)
+
+# ll.print_list()
+
+# print ll.check_palindrom()
 
 ll.print_list()
-
