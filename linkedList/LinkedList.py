@@ -382,6 +382,9 @@ class LinkList:
                 temp = prev.get_next()
         # temp = self.head
 
+    def swap_adjacent(self):
+        return True
+
 
 ll = LinkList()
 
