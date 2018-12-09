@@ -1,4 +1,4 @@
-from Vertex import Vertex
+from Graph.Vertex import Vertex
 
 
 class Graph(object):
@@ -37,3 +37,13 @@ class Graph(object):
     # |E|
     def getEdgeSize(self):
         return self.no_of_edge
+
+    def __iter__(self):
+        return iter(self.vertices.values())
+
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
