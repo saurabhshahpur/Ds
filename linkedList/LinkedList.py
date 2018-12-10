@@ -1,3 +1,5 @@
+from __future__ import print_function
+from __future__ import print_function
 from Node import Node
 
 
@@ -10,12 +12,13 @@ class LinkList:
         temp = Node(data, self.head)
         self.head = temp
         self.size += 1
+        return temp
 
     def print_list(self):
         temp = self.head
 
         while temp:
-            print temp.get_data(),
+            print(temp.get_data())
             temp = temp.get_next()
 
         print "\n"
@@ -24,7 +27,7 @@ class LinkList:
         if not temp:
             return
         self.print_reverse(temp.get_next())
-        print temp.get_data(),
+        print(temp.get_data())
 
     def insert_at_end(self, data):
         temp = Node(data)
