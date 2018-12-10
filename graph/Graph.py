@@ -1,4 +1,5 @@
 from graph.Vertex import Vertex
+from queue.Queue import Queue
 
 
 class Graph(object):
@@ -41,9 +42,32 @@ class Graph(object):
     def __iter__(self):
         return iter(self.vertices.values())
 
+    def BFS(self, key):
+        q = Queue()
+        vs = self.getVertices()
+        if self.getVertexSize() == 0:
+            return
+        q.enQueue(vs[0])
+        visited = {}
+        for v in vs:
+            visited[v] = False
+
+        while not q.isEmpty():
+            curr_v = q.deQueue()
+            visited[curr_v] = True
+            if curr_v == key:
+                return True
+            u = self.getVertex(curr_v)
+            connections = u.getConnections()
+            for v in connections:
+                if not visited[v.getId()]:
+                    q.enQueue(v.getId())
+        return False
+
 
 def main():
     pass
+
 
 if __name__ == '__main__':
     main()

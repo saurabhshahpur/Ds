@@ -22,8 +22,13 @@ class Queue(object):
         temp = self.front
         self.front = self.front.next
         self.size -= 1
-        return temp
+        return temp.data
 
     def __len__(self):
         return self.size
+
+    def isEmpty(self):
+        if self.size == 0:
+            return True
+        return False
 
