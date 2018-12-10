@@ -1,9 +1,8 @@
 from __future__ import print_function
-from __future__ import print_function
 from Node import Node
 
 
-class LinkList:
+class LinkList(object):
     def __init__(self, head=None):
         self.head = head
         self.size = 0
@@ -21,7 +20,7 @@ class LinkList:
             print(temp.get_data())
             temp = temp.get_next()
 
-        print "\n"
+        print ("\n")
 
     def print_reverse(self, temp):
         if not temp:
@@ -52,7 +51,7 @@ class LinkList:
         temp = Node(data)
         length = self.size
         if pos < 0 or pos > length:
-            print "index out of range, index start from 0"
+            print ("index out of range, index start from 0")
             return
 
         if pos == 0:
@@ -75,10 +74,10 @@ class LinkList:
     def delete_at_pos(self, pos):
 
         if pos < 0 or pos + 1 > self.size:
-            print "index out of range, index start from 0"
+            print ("index out of range, index start from 0")
             return
         if self.size == 0:
-            print "list already empty"
+            print ("list already empty")
             return
         if pos == 0:
             temp = self.head
@@ -107,7 +106,7 @@ class LinkList:
             temp = temp.get_next()
 
         if not temp:
-            print "key not found"
+            print ("key not found")
             return
         if not prev:
             # found at  start of list
@@ -155,7 +154,7 @@ class LinkList:
             node2 = node2.get_next()
 
         if not node1 or not node2:
-            print "invalid keys"
+            print ("invalid keys")
             return
         if not prev2:
             # swap node1, node2 and prev1, prev2
@@ -252,7 +251,7 @@ class LinkList:
             temp = temp.get_next()
 
         if not temp:
-            print "key not found"
+            print ("key not found")
             return
 
         temp1 = self.head
@@ -378,12 +377,12 @@ class LinkList:
             if temp.get_data() not in map_dict:
                 map_dict[temp.get_data()] = 1
                 prev = temp
-                temp =temp.get_next()
+                temp = temp.get_next()
             else:
                 prev.set_next(temp.get_next())
                 del temp
                 temp = prev.get_next()
-        # temp = self.head
+                # temp = self.head
 
     def swap_adjacent(self):
         return True
