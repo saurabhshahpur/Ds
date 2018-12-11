@@ -1,5 +1,6 @@
 from graph.Vertex import Vertex
 from queue.Queue import Queue
+from collections import deque
 
 
 class Graph(object):
@@ -43,6 +44,7 @@ class Graph(object):
         return iter(self.vertices.values())
 
     def BFS(self, s):
+        # todo use collection dequeue module for queue
         q = Queue()
         vs = self.getVertices()
         if s not in vs:
