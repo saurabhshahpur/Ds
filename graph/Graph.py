@@ -1,5 +1,4 @@
 from graph.Vertex import Vertex
-from queue.Queue import Queue
 from collections import deque
 
 
@@ -44,28 +43,27 @@ class Graph(object):
         return iter(self.vertices.values())
 
     def BFS(self, s):
-        # todo use collection dequeue module for queue
-        q = Queue()
+        q = deque()
         vs = self.getVertices()
         if s not in vs:
             print ("start Vertex not found")
             return None
         if self.getVertexSize() == 0:
             return
-        q.enQueue(vs[s])
+        q.append(vs[s])
         visited = {}
         for v in vs:
             visited[v] = False
 
-        while not q.isEmpty():
-            curr_v = q.deQueue()
+        while len(q):
+            curr_v = q.popleft()
             visited[curr_v] = True
             print ("visited vertex: " + str(curr_v))
             u = self.getVertex(curr_v)
             connections = u.getConnections()
             for v in connections:
                 if not visited[v.getId()]:
-                    q.enQueue(v.getId())
+                    q.append(v.getId())
 
 
 def main():
