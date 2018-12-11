@@ -32,3 +32,6 @@ class Queue(object):
             return True
         return False
 
+    def Front(self):
+        return self.front.data
+
