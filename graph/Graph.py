@@ -47,9 +47,8 @@ class Graph(object):
         vs = self.getVertices()
         if s not in vs:
             print ("start Vertex not found")
-            return None
-        if self.getVertexSize() == 0:
             return
+
         q.append(vs[s])
         visited = {}
         for v in vs:
@@ -64,6 +63,25 @@ class Graph(object):
             for v in connections:
                 if not visited[v.getId()]:
                     q.append(v.getId())
+
+    def _DFSUtil(self, v, visited):
+        visited[v] = True
+        print ("visited vertex: " + str(v))
+        u = self.getVertex(v)
+        connections = u.getConnections()
+        for nbr in connections:
+            if not visited[nbr.getId()]:
+                self._DFSUtil(nbr.getId(), visited)
+
+    def DFS(self, s):
+        stack = {}
+        vs = self.getVertices()
+        if s not in vs:
+            print ("start Vertex not found")
+            return
+        for v in vs:
+            stack[v] = False
+        self._DFSUtil(s, stack)
 
 
 def main():
